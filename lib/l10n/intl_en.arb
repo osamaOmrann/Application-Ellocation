@@ -1,6 +1,5 @@
 {
-    "app_title": "Application Ellocation",
-    "welcome_to_application_ellocation": "Welcome To Application Ellocation",
-    "login_with": "Login With",
-    "google": "Google"
+    "login": "Login",
+    "sign_in_to_continue": "Sing in to continue.",
+    "sign_in_with_google": "Sign in with Googel"
 }

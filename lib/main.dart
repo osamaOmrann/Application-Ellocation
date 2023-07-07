@@ -1,21 +1,28 @@
 import 'package:application_ellocation/firebase_options.dart';
+import 'package:application_ellocation/providers/language_provider.dart';
 import 'package:application_ellocation/screens/auth/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   _initializeFirebase();
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider<LanguageProvider>(
+      create: (buildContext) {
+        return LanguageProvider();
+      },
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var langProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Application Ellocation',
@@ -42,6 +49,7 @@ class MyApp extends StatelessWidget {
         Locale('en'), // English
         Locale('ar'), // Spanish
       ],
+      locale: Locale(langProvider.currentLanguage),
       home: LoginScreen(),
     );
   }

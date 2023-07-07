@@ -51,41 +51,31 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Application Ellocation`
-  String get app_title {
+  /// `Login`
+  String get login {
     return Intl.message(
-      'Application Ellocation',
-      name: 'app_title',
+      'Login',
+      name: 'login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Welcome To Application Ellocation`
-  String get welcome_to_application_ellocation {
+  /// `Sing in to continue.`
+  String get sign_in_to_continue {
     return Intl.message(
-      'Welcome To Application Ellocation',
-      name: 'welcome_to_application_ellocation',
+      'Sing in to continue.',
+      name: 'sign_in_to_continue',
       desc: '',
       args: [],
     );
   }
 
-  /// `Login With`
-  String get login_with {
+  /// `Sign in with Googel`
+  String get sign_in_with_google {
     return Intl.message(
-      'Login With',
-      name: 'login_with',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Google`
-  String get google {
-    return Intl.message(
-      'Google',
-      name: 'google',
+      'Sign in with Googel',
+      name: 'sign_in_with_google',
       desc: '',
       args: [],
     );
@@ -104,10 +94,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

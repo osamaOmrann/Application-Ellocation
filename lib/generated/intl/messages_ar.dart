@@ -21,13 +21,11 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "app_title": MessageLookupByLibrary.simpleMessage("أبلكيشن اللوكيشن"),
-        "google": MessageLookupByLibrary.simpleMessage("جوجل"),
-        "login_with": MessageLookupByLibrary.simpleMessage("سجل دخول بـ"),
-        "welcome_to_application_ellocation":
-            MessageLookupByLibrary.simpleMessage(
-                "مرحبا بكم في أبلكيشن اللوكيشن")
+        "login": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
+        "sign_in_to_continue":
+            MessageLookupByLibrary.simpleMessage("سجل دخول للمتابعة."),
+        "sign_in_with_google":
+            MessageLookupByLibrary.simpleMessage("سجل دخول بجوجل")
       };
 }
