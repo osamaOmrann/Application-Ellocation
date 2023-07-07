@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691213318665",
+    "project_id": "application-ellocation",
+    "storage_bucket": "application-ellocation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691213318665:android:fac5531d1ca230e16356d8",
+        "android_client_info": {
+          "package_name": "com.example.application_ellocation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691213318665-689svakc0lqu5pfvj2au98fr9vo7gsfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuW8J0lvSEDi7u1J984LOrG1VjEyd5KPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691213318665-689svakc0lqu5pfvj2au98fr9vo7gsfl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
