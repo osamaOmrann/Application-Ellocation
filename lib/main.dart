@@ -1,21 +1,30 @@
+import 'package:application_ellocation/apis/apis.dart';
 import 'package:application_ellocation/firebase_options.dart';
 import 'package:application_ellocation/providers/language_provider.dart';
 import 'package:application_ellocation/screens/auth/login_screen.dart';
+import 'package:application_ellocation/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-main() {
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  _initializeFirebase();
-  runApp(ChangeNotifierProvider<LanguageProvider>(
-      create: (buildContext) {
-        return LanguageProvider();
-      },
-      child: MyApp()));
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) {
+    runApp(ChangeNotifierProvider<LanguageProvider>(
+        create: (buildContext) {
+          return LanguageProvider();
+        },
+        child: MyApp()));
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +45,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'MyArabicFont',
               fontWeight: FontWeight.normal,
               fontSize: 19),
-          backgroundColor: Colors.white,
+          backgroundColor: Color(0xff81a969),
         ),
       ),
       localizationsDelegates: [
@@ -50,13 +59,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'), // Spanish
       ],
       locale: Locale(langProvider.currentLanguage),
-      home: LoginScreen(),
+      home: APIs.auth.currentUser != null ? HomeScreen() : LoginScreen(),
     );
   }
-}
-
-_initializeFirebase() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 }

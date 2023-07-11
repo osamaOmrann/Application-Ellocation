@@ -69,6 +69,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '691213318665',
     projectId: 'application-ellocation',
     storageBucket: 'application-ellocation.appspot.com',
+    androidClientId:
+        '691213318665-qcps7a7t6bqeam9d5u6inl02jrer6oa8.apps.googleusercontent.com',
     iosClientId:
         '691213318665-npbl76tm7nqismrc234re1v8028clb9d.apps.googleusercontent.com',
     iosBundleId: 'com.example.applicationEllocation',
