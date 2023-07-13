@@ -22,7 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "find_a_device": MessageLookupByLibrary.simpleMessage("Find my device"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_in_to_continue":
             MessageLookupByLibrary.simpleMessage("Sing in to continue."),
         "sign_in_with_google":
