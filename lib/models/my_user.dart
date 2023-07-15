@@ -1,15 +1,9 @@
-class User {
+class MyUser {
   static const String collectionName = 'users';
-  final String? id,
-      created_at,
-      email,
-      image,
-      is_online,
-      last_active,
-      name,
-      push_token;
+  final String? id, created_at, email, image, last_active, name, push_token;
+  final bool? is_online;
 
-  User(
+  MyUser(
       {this.created_at,
       this.email,
       this.image,
@@ -19,7 +13,7 @@ class User {
       this.push_token,
       this.id});
 
-  User.fromFirestore(Map<String, dynamic> data)
+  MyUser.fromFirestore(Map<String, dynamic> data)
       : this(
             id: data['id'],
             name: data['name'],

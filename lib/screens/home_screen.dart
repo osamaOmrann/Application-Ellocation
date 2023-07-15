@@ -1,5 +1,6 @@
 import 'package:application_ellocation/apis/apis.dart';
 import 'package:application_ellocation/screens/home_side_menu.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,7 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           actions: [
-            Padding(
+            CachedNetworkImage(
+                imageUrl: '',
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    CircleAvatar(child: Icon(CupertinoIcons.person_alt))),
+            /*Padding(
               padding: EdgeInsets.only(bottom: 8.0),
               child: Container(
                   padding: EdgeInsets.all(width * .015),
@@ -63,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(width * .039)),
                   child: Image.asset('assets/images/icon.png')),
-            ),
+            ),*/
             SizedBox(
               width: width * .05,
             )
