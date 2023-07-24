@@ -5,6 +5,7 @@ import 'package:application_ellocation/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:location/location.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     print('\nUser: ${APIs.auth.currentUser}');
+    getPermission();
   }
 
   @override
@@ -187,5 +189,39 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  LocationData? _locationData;
+  Location location = new Location();
+
+  void getPermission() async {
+    var isLocationServiceEnabled = await isServiceEnabled();
+    if (!isLocationServiceEnabled) return;
+    var isPermissionEnabled = await isPermissionGranted();
+    if (!isPermissionEnabled) return;
+    _locationData = await location.getLocation();
+    print(_locationData?.latitude);
+    print(_locationData?.longitude);
+  }
+
+  //Get Location Opened
+  Future<bool> isServiceEnabled() async {
+    bool _serviceEnabled;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+    }
+    return _serviceEnabled;
+  }
+
+  //Get Permission To User Location
+  Future<bool> isPermissionGranted() async {
+    PermissionStatus _permissionGranted;
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+    }
+    return _permissionGranted != PermissionStatus.granted;
   }
 }

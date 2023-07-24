@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "go": MessageLookupByLibrary.simpleMessage("ابحث"),
         "id": MessageLookupByLibrary.simpleMessage("الرمز"),
         "id_required": MessageLookupByLibrary.simpleMessage("يجب إدخال رمز"),
+        "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "log_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
         "save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people":

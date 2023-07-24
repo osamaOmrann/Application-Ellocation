@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "go": MessageLookupByLibrary.simpleMessage("go"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "id_required": MessageLookupByLibrary.simpleMessage("ID required"),
+        "location": MessageLookupByLibrary.simpleMessage("Location"),
         "log_out": MessageLookupByLibrary.simpleMessage("Log out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people":
@@ -38,7 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in_to_continue":
             MessageLookupByLibrary.simpleMessage("Sing in to continue."),
         "sign_in_with_google":
-            MessageLookupByLibrary.simpleMessage("Sign in with Googel"),
+            MessageLookupByLibrary.simpleMessage("Sign in with Google"),
         "your_id_is": MessageLookupByLibrary.simpleMessage("Your ID is:")
       };
 }

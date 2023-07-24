@@ -71,10 +71,10 @@ class S {
     );
   }
 
-  /// `Sign in with Googel`
+  /// `Sign in with Google`
   String get sign_in_with_google {
     return Intl.message(
-      'Sign in with Googel',
+      'Sign in with Google',
       name: 'sign_in_with_google',
       desc: '',
       args: [],
@@ -188,6 +188,16 @@ class S {
     return Intl.message(
       'go',
       name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message(
+      'Location',
+      name: 'location',
       desc: '',
       args: [],
     );
