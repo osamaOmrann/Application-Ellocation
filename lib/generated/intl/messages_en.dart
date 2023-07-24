@@ -22,12 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "copy_id": MessageLookupByLibrary.simpleMessage("Copy ID"),
+        "enter_id": MessageLookupByLibrary.simpleMessage("Enter ID"),
         "find_a_device": MessageLookupByLibrary.simpleMessage("Find my device"),
+        "go": MessageLookupByLibrary.simpleMessage("go"),
+        "id": MessageLookupByLibrary.simpleMessage("ID"),
+        "id_required": MessageLookupByLibrary.simpleMessage("ID required"),
+        "log_out": MessageLookupByLibrary.simpleMessage("Log out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people":
+            MessageLookupByLibrary.simpleMessage(
+                "Save it to your memory, or to any note outside your device. And don\'t tell to unreliable people."),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_in_to_continue":
             MessageLookupByLibrary.simpleMessage("Sing in to continue."),
         "sign_in_with_google":
-            MessageLookupByLibrary.simpleMessage("Sign in with Googel")
+            MessageLookupByLibrary.simpleMessage("Sign in with Googel"),
+        "your_id_is": MessageLookupByLibrary.simpleMessage("Your ID is:")
       };
 }

@@ -3,5 +3,15 @@
     "sign_in_to_continue": "سجل دخول للمتابعة.",
     "sign_in_with_google": "سجل دخول بجوجل",
     "find_a_device": "ابحث عن جهازي",
-    "settings": "الاعدادات"
+    "settings": "الاعدادات",
+    "log_out": "تسجيل خروج",
+    "your_id_is": "رمز هاتفك هو:",
+    "save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people": "احفظه في ذاكرتك، أو في أي مكان خارج جهازك. ولا تخبر به أشخاصاً غير موثوقين.",
+    "copy_id": "نسخ الرمز",
+    "enter_id": "أدخل الرمز",
+    "id_required": "يجب إدخال رمز",
+    "id": "الرمز",
+    "cancel": "إلغاء",
+    "go": "ابحث",
+    "settings": "الإعدادات"
 }

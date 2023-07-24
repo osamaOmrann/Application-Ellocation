@@ -1,39 +1,57 @@
 class MyUser {
-  static const String collectionName = 'users';
-  final String? id, created_at, email, image, last_active, name, push_token;
-  final bool? is_online;
+  MyUser({
+    required this.image,
+    required this.about,
+    required this.name,
+    required this.createdAt,
+    required this.lastActive,
+    required this.isOnline,
+    required this.id,
+    required this.email,
+    required this.pushToken,
+    required this.lat,
+    required this.long,
+  });
 
-  MyUser(
-      {this.created_at,
-      this.email,
-      this.image,
-      this.is_online,
-      this.last_active,
-      this.name,
-      this.push_token,
-      this.id});
+  late String image;
+  late String about;
+  late String name;
+  late String createdAt;
+  late String lastActive;
+  late bool isOnline;
+  late String id;
+  late String email;
+  late String pushToken;
+  late String lat;
+  late String long;
 
-  MyUser.fromFirestore(Map<String, dynamic> data)
-      : this(
-            id: data['id'],
-            name: data['name'],
-            image: data['image'],
-            created_at: data['created_at'],
-            email: data['email'],
-            is_online: data['is_online'],
-            last_active: data['last_active'],
-            push_token: data['push_token']);
+  MyUser.fromJson(Map<String, dynamic> json) {
+    image = json['image'] ?? '';
+    about = json['about'] ?? '';
+    name = json['name'] ?? '';
+    createdAt = json['created_at'] ?? '';
+    lastActive = json['last_active'] ?? '';
+    isOnline = json['is_online'] ?? false;
+    id = json['id'] ?? '';
+    email = json['email'] ?? '';
+    pushToken = json['push_token'] ?? '';
+    lat = json['lat'] ?? '';
+    long = json['long'] ?? '';
+  }
 
-  Map<String, dynamic> toFirestore() {
-    return {
-      'id': id,
-      'name': name,
-      'image': image,
-      'created_at': created_at,
-      'email': email,
-      'is_online': is_online,
-      'last_active': last_active,
-      'push_token': push_token
-    };
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['image'] = image;
+    data['about'] = about;
+    data['name'] = name;
+    data['created_at'] = createdAt;
+    data['last_active'] = lastActive;
+    data['is_online'] = isOnline;
+    data['id'] = id;
+    data['email'] = email;
+    data['push_token'] = pushToken;
+    data['lat'] = lat;
+    data['long'] = long;
+    return data;
   }
 }

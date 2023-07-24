@@ -1,10 +1,10 @@
 import 'package:application_ellocation/apis/apis.dart';
 import 'package:application_ellocation/screens/home_side_menu.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:application_ellocation/screens/search_result_screen.dart';
+import 'package:application_ellocation/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var formKey = GlobalKey<FormState>();
+  final TextEditingController idController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -56,12 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
           actions: [
-            CachedNetworkImage(
-                imageUrl: '',
-                placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) =>
-                    CircleAvatar(child: Icon(CupertinoIcons.person_alt))),
-            /*Padding(
+            Padding(
               padding: EdgeInsets.only(bottom: 8.0),
               child: Container(
                   padding: EdgeInsets.all(width * .015),
@@ -69,18 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(width * .039)),
                   child: Image.asset('assets/images/icon.png')),
-            ),*/
+            ),
             SizedBox(
               width: width * .05,
             )
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await APIs.auth.signOut();
-            await GoogleSignIn().signOut();
-          },
-          child: Icon(Icons.logout),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,55 +79,108 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               width: double.infinity,
             ),
-            Container(
-              height: height * .11,
-              width: height * .11,
-              decoration: BoxDecoration(
-                  color: Color(0xff81a969),
-                  borderRadius: BorderRadius.circular(width * .05)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    CupertinoIcons.search,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    height: height * .015,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.find_a_device,
-                    style:
-                        TextStyle(color: Colors.white, fontSize: width * .03),
-                  )
-                ],
+            InkWell(
+              onTap: () {
+                showDialog<void>(
+                  context: context,
+                  builder: (BuildContext dialogContext) {
+                    return Form(
+                      key: formKey,
+                      child: AlertDialog(
+                        title: Text(AppLocalizations.of(context)!.enter_id),
+                        content: TextFormField(
+                          controller: idController,
+                          validator: (text) {
+                            if (text == null || text.trim().isEmpty) {
+                              return AppLocalizations.of(context)!.id_required;
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.id),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text(AppLocalizations.of(context)!.go),
+                            onPressed: () {
+                              if (formKey.currentState?.validate() == false) {
+                                return;
+                              }
+                              Navigator.of(dialogContext).pop();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => SearchResultScreen(
+                                          idController.text.toString())));
+                            },
+                          ),
+                          TextButton(
+                            child: Text(AppLocalizations.of(context)!.cancel),
+                            onPressed: () {
+                              Navigator.of(dialogContext)
+                                  .pop(); // Dismiss alert dialog
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                height: height * .11,
+                width: height * .11,
+                decoration: BoxDecoration(
+                    color: Color(0xff81a969),
+                    borderRadius: BorderRadius.circular(width * .05)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      CupertinoIcons.search,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: height * .015,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.find_a_device,
+                      style:
+                          TextStyle(color: Colors.white, fontSize: width * .03),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
               height: height * .05,
             ),
-            Container(
-              height: height * .11,
-              width: height * .11,
-              decoration: BoxDecoration(
-                  color: Color(0xff81a969),
-                  borderRadius: BorderRadius.circular(width * .05)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    CupertinoIcons.settings_solid,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    height: height * .015,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.settings,
-                    style:
-                        TextStyle(color: Colors.white, fontSize: width * .03),
-                  )
-                ],
+            InkWell(
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => Settings())),
+              child: Container(
+                height: height * .11,
+                width: height * .11,
+                decoration: BoxDecoration(
+                    color: Color(0xff81a969),
+                    borderRadius: BorderRadius.circular(width * .05)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      CupertinoIcons.settings_solid,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: height * .015,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.settings,
+                      style:
+                          TextStyle(color: Colors.white, fontSize: width * .03),
+                    )
+                  ],
+                ),
               ),
             )
           ],

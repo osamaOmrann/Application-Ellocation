@@ -100,6 +100,98 @@ class S {
       args: [],
     );
   }
+
+  /// `Log out`
+  String get log_out {
+    return Intl.message(
+      'Log out',
+      name: 'log_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your ID is:`
+  String get your_id_is {
+    return Intl.message(
+      'Your ID is:',
+      name: 'your_id_is',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save it to your memory, or to any note outside your device. And don't tell to unreliable people.`
+  String
+      get save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people {
+    return Intl.message(
+      'Save it to your memory, or to any note outside your device. And don\'t tell to unreliable people.',
+      name:
+          'save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy ID`
+  String get copy_id {
+    return Intl.message(
+      'Copy ID',
+      name: 'copy_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter ID`
+  String get enter_id {
+    return Intl.message(
+      'Enter ID',
+      name: 'enter_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID required`
+  String get id_required {
+    return Intl.message(
+      'ID required',
+      name: 'id_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID`
+  String get id {
+    return Intl.message(
+      'ID',
+      name: 'id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `cancel`
+  String get cancel {
+    return Intl.message(
+      'cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `go`
+  String get go {
+    return Intl.message(
+      'go',
+      name: 'go',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

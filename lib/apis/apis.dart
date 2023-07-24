@@ -20,14 +20,17 @@ class APIs {
         name: user.displayName.toString(),
         email: user.email.toString(),
         image: user.photoURL.toString(),
-        created_at: time,
-        is_online: false,
-        last_active: time,
-        push_token: '');
+        lat: '',
+        long: '',
+        about: '',
+        createdAt: '',
+        lastActive: '',
+        isOnline: true,
+        pushToken: '');
 
     return await firestore
         .collection('users')
         .doc(user.uid)
-        .set(myUser.toFirestore());
+        .set(myUser.toJson());
   }
 }

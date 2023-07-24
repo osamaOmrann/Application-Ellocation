@@ -22,12 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "copy_id": MessageLookupByLibrary.simpleMessage("نسخ الرمز"),
+        "enter_id": MessageLookupByLibrary.simpleMessage("أدخل الرمز"),
         "find_a_device": MessageLookupByLibrary.simpleMessage("ابحث عن جهازي"),
+        "go": MessageLookupByLibrary.simpleMessage("ابحث"),
+        "id": MessageLookupByLibrary.simpleMessage("الرمز"),
+        "id_required": MessageLookupByLibrary.simpleMessage("يجب إدخال رمز"),
+        "log_out": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل دخول"),
-        "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "save_it_to_your_memory_or_to_any_note_outside_your_device_and_do_not_tell_to_unreliable_people":
+            MessageLookupByLibrary.simpleMessage(
+                "احفظه في ذاكرتك، أو في أي مكان خارج جهازك. ولا تخبر به أشخاصاً غير موثوقين."),
+        "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "sign_in_to_continue":
             MessageLookupByLibrary.simpleMessage("سجل دخول للمتابعة."),
         "sign_in_with_google":
-            MessageLookupByLibrary.simpleMessage("سجل دخول بجوجل")
+            MessageLookupByLibrary.simpleMessage("سجل دخول بجوجل"),
+        "your_id_is": MessageLookupByLibrary.simpleMessage("رمز هاتفك هو:")
       };
 }
