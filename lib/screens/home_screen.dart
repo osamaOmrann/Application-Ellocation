@@ -200,8 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
     var isPermissionEnabled = await isPermissionGranted();
     if (!isPermissionEnabled) return;
     _locationData = await location.getLocation();
-    print(_locationData?.latitude);
-    print(_locationData?.longitude);
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      _locationData = currentLocation;
+      /*print(_locationData?.latitude);
+      print(_locationData?.longitude);*/
+    });
   }
 
   //Get Location Opened
@@ -215,13 +218,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return _serviceEnabled;
   }
 
-  //Get Permission To User Location
+  //Get Permission To Use Location
   Future<bool> isPermissionGranted() async {
     PermissionStatus _permissionGranted;
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
     }
-    return _permissionGranted != PermissionStatus.granted;
+    return _permissionGranted == PermissionStatus.granted;
   }
 }
