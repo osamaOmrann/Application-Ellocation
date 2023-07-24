@@ -22,8 +22,8 @@ class MyUser {
   late String id;
   late String email;
   late String pushToken;
-  late String lat;
-  late String long;
+  late double lat;
+  late double long;
 
   MyUser.fromJson(Map<String, dynamic> json) {
     image = json['image'] ?? '';

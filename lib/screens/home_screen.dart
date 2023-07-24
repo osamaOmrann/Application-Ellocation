@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:application_ellocation/apis/apis.dart';
 import 'package:application_ellocation/screens/home_side_menu.dart';
 import 'package:application_ellocation/screens/search_result_screen.dart';
@@ -5,6 +7,7 @@ import 'package:application_ellocation/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,7 +26,33 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     print('\nUser: ${APIs.auth.currentUser}');
     getPermission();
+    markers = {
+      Marker(
+          markerId: MarkerId('user_location'),
+          position: LatLng(_locationData?.latitude ?? defLat,
+              _locationData?.longitude ?? defLng))
+    };
+    /*for (int i = 0; i < 1;) {
+      executeAfterDelay();
+    }*/
   }
+
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+  var defLat = 37.43296265331129;
+  var defLng = -122.085749655962;
+  late Set<Marker> markers;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +142,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => SearchResultScreen(
-                                          idController.text.toString())));
+                                          idController.text.toString(),
+                                          _controller,
+                                          _kGooglePlex,
+                                          _kLake,
+                                          markers)));
                             },
                           ),
                           TextButton(
@@ -148,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       AppLocalizations.of(context)!.find_a_device,
                       style:
-                          TextStyle(color: Colors.white, fontSize: width * .03),
+                      TextStyle(color: Colors.white, fontSize: width * .03),
                     )
                   ],
                 ),
@@ -179,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       AppLocalizations.of(context)!.settings,
                       style:
-                          TextStyle(color: Colors.white, fontSize: width * .03),
+                      TextStyle(color: Colors.white, fontSize: width * .03),
                     )
                   ],
                 ),
@@ -202,6 +235,14 @@ class _HomeScreenState extends State<HomeScreen> {
     _locationData = await location.getLocation();
     location.onLocationChanged.listen((LocationData currentLocation) {
       _locationData = currentLocation;
+      var marker = Marker(
+          markerId: MarkerId('user_location'),
+          position: LatLng(_locationData?.latitude ?? defLat,
+              _locationData?.longitude ?? defLng));
+      markers.add(marker);
+      setState(() {});
+      animatedCamera(_locationData?.latitude ?? defLat,
+          _locationData?.longitude ?? defLng);
       /*print(_locationData?.latitude);
       print(_locationData?.longitude);*/
     });
@@ -227,4 +268,22 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return _permissionGranted == PermissionStatus.granted;
   }
+
+  void animatedCamera(double lat, double lng) async {
+    var cameraPosition = CameraPosition(
+      target: LatLng(lat, lng),
+      zoom: 19,
+    );
+    final GoogleMapController controller = await _controller.future;
+    await controller
+        .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+  }
+
+/*Future<void> executeAfterDelay() async {
+    // Wait for 2 seconds
+    await Future.delayed(Duration(seconds: 2));
+
+    // Execute your function here
+    print('Function executed after 2 seconds');
+  }*/
 }

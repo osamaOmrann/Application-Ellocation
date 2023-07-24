@@ -40,6 +40,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("سجل دخول للمتابعة."),
         "sign_in_with_google":
             MessageLookupByLibrary.simpleMessage("سجل دخول بجوجل"),
-        "your_id_is": MessageLookupByLibrary.simpleMessage("رمز هاتفك هو:")
+        "your_id_is": MessageLookupByLibrary.simpleMessage("رمز حسابك هو:")
       };
 }
