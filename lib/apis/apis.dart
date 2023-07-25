@@ -33,4 +33,25 @@ class APIs {
         .doc(user.uid)
         .set(myUser.toJson());
   }
+
+  static updateLocation(double lat, double lng) {
+    CollectionReference omarMustafaRef = getUsersCollection();
+    omarMustafaRef.doc(user.uid).update({'lat': lat, 'long': lng});
+  }
+
+  static CollectionReference<MyUser> getUsersCollection() {
+    return firestore.collection('users').withConverter<MyUser>(
+        fromFirestore: ((snapshot, options) {
+      return MyUser.fromJson(snapshot.data()!);
+    }), toFirestore: (user, options) {
+      return user.toJson();
+    });
+  }
+
+  static Future<MyUser?> getFutureOfUserById(String uid) async {
+    var collection = getUsersCollection();
+    var docRef = collection.doc(uid);
+    var res = await docRef.get();
+    return res.data();
+  }
 }

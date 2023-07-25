@@ -35,8 +35,8 @@ class MyUser {
     id = json['id'] ?? '';
     email = json['email'] ?? '';
     pushToken = json['push_token'] ?? '';
-    lat = json['lat'] ?? '';
-    long = json['long'] ?? '';
+    lat = json['lat'] ?? 0.00000;
+    long = json['long'] ?? 0.00000;
   }
 
   Map<String, dynamic> toJson() {

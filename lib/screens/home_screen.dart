@@ -133,10 +133,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         actions: <Widget>[
                           TextButton(
                             child: Text(AppLocalizations.of(context)!.go),
-                            onPressed: () {
+                            onPressed: () async {
                               if (formKey.currentState?.validate() == false) {
                                 return;
                               }
+                              var retrievedUser =
+                                  await APIs.getFutureOfUserById(
+                                      idController.text.toString());
                               Navigator.of(dialogContext).pop();
                               Navigator.push(
                                   context,
@@ -144,9 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: (_) => SearchResultScreen(
                                           idController.text.toString(),
                                           _controller,
-                                          _kGooglePlex,
-                                          _kLake,
-                                          markers)));
+                                          markers,
+                                          retrievedUser!.lat,
+                                          retrievedUser!.long)));
                             },
                           ),
                           TextButton(
@@ -181,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       AppLocalizations.of(context)!.find_a_device,
                       style:
-                      TextStyle(color: Colors.white, fontSize: width * .03),
+                          TextStyle(color: Colors.white, fontSize: width * .03),
                     )
                   ],
                 ),
@@ -212,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       AppLocalizations.of(context)!.settings,
                       style:
-                      TextStyle(color: Colors.white, fontSize: width * .03),
+                          TextStyle(color: Colors.white, fontSize: width * .03),
                     )
                   ],
                 ),
@@ -235,6 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _locationData = await location.getLocation();
     location.onLocationChanged.listen((LocationData currentLocation) {
       _locationData = currentLocation;
+      APIs.updateLocation(_locationData?.latitude ?? defLat,
+          _locationData?.longitude ?? defLng);
       var marker = Marker(
           markerId: MarkerId('user_location'),
           position: LatLng(_locationData?.latitude ?? defLat,
@@ -243,8 +248,8 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {});
       animatedCamera(_locationData?.latitude ?? defLat,
           _locationData?.longitude ?? defLng);
-      /*print(_locationData?.latitude);
-      print(_locationData?.longitude);*/
+      print(_locationData?.latitude);
+      print(_locationData?.longitude);
     });
   }
 
