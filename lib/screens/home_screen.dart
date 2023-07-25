@@ -32,9 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
           position: LatLng(_locationData?.latitude ?? defLat,
               _locationData?.longitude ?? defLng))
     };
-    /*for (int i = 0; i < 1;) {
-      executeAfterDelay();
-    }*/
   }
 
   final Completer<GoogleMapController> _controller =
@@ -147,9 +144,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: (_) => SearchResultScreen(
                                           idController.text.toString(),
                                           _controller,
-                                          markers,
-                                          retrievedUser!.lat,
-                                          retrievedUser!.long)));
+                                          {
+                                            Marker(
+                                                markerId:
+                                                    MarkerId('user_location'),
+                                                position: LatLng(
+                                                    retrievedUser!.lat,
+                                                    retrievedUser.long))
+                                          },
+                                          retrievedUser.lat,
+                                          retrievedUser.long)));
                             },
                           ),
                           TextButton(

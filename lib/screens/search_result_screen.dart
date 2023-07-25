@@ -28,16 +28,13 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   Widget build(BuildContext context) {
     CameraPosition _kGooglePlex = CameraPosition(
       target: LatLng(widget.lat, widget.lng),
-      zoom: 14.4746,
+      zoom: 19,
     );
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.location)),
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          widget._controller.complete(controller);
-        },
         markers: widget.markers,
       ),
       /*floatingActionButton: FloatingActionButton.extended(

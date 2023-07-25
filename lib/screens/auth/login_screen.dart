@@ -105,27 +105,23 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(builder: (_) => HomeScreen()));
                         }),
                         child: Container(
-                          padding: EdgeInsets.all(width * .01),
-                          color: Color(0xffe1ecf6),
-                          child: Container(
-                            padding: EdgeInsets.all(width * .03),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(width * .03)),
-                            child: Row(children: [
-                              Image.asset(
-                                'assets/images/google.png',
-                                width: width * .07,
-                                height: width * .07,
-                              ),
-                              SizedBox(
-                                width: width * .09,
-                              ),
-                              Text(AppLocalizations.of(context)!
-                                  .sign_in_with_google)
-                            ]),
-                          ),
+                          padding: EdgeInsets.all(width * .03),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: width * .0019),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(width * .03)),
+                          child: Row(children: [
+                            Image.asset(
+                              'assets/images/google.png',
+                              width: width * .07,
+                              height: width * .07,
+                            ),
+                            SizedBox(
+                              width: width * .09,
+                            ),
+                            Text(AppLocalizations.of(context)!
+                                .sign_in_with_google)
+                          ]),
                         ),
                       )
                     ],
