@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copy_id": MessageLookupByLibrary.simpleMessage("Copy ID"),
         "enter_id": MessageLookupByLibrary.simpleMessage("Enter ID"),
         "find_a_device": MessageLookupByLibrary.simpleMessage("Find my device"),
-        "go": MessageLookupByLibrary.simpleMessage("go"),
+        "go": MessageLookupByLibrary.simpleMessage("Go"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "id_required": MessageLookupByLibrary.simpleMessage("ID required"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),

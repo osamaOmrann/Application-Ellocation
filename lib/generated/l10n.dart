@@ -183,10 +183,10 @@ class S {
     );
   }
 
-  /// `go`
+  /// `Go`
   String get go {
     return Intl.message(
-      'go',
+      'Go',
       name: 'go',
       desc: '',
       args: [],

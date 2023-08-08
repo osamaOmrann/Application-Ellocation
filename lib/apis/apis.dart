@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:application_ellocation/models/my_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,8 +44,8 @@ class APIs {
   static CollectionReference<MyUser> getUsersCollection() {
     return firestore.collection('users').withConverter<MyUser>(
         fromFirestore: ((snapshot, options) {
-      return MyUser.fromJson(snapshot.data()!);
-    }), toFirestore: (user, options) {
+          return MyUser.fromJson(snapshot.data()!);
+        }), toFirestore: (user, options) {
       return user.toJson();
     });
   }
@@ -53,5 +55,17 @@ class APIs {
     var docRef = collection.doc(uid);
     var res = await docRef.get();
     return res.data();
+  }
+
+  static Future<bool> checkStudentExistence(String id) async {
+    final data =
+        await firestore.collection('users').where('id', isEqualTo: id).get();
+    log('data: ${data.docs}');
+    if (data.docs.isNotEmpty && data.docs.first.id != user.uid) {
+      log('user exists: ${data.docs.first.data()}');
+      return true;
+    } else {
+      return false;
+    }
   }
 }

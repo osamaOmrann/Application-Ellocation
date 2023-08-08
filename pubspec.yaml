@@ -47,6 +47,8 @@ dependencies:
   pinput: ^2.2.31
   location: ^4.4.0
   google_maps_flutter: ^2.3.0
+  flutter_background_service: ^4.0.0
+  flutter_local_notifications: ^15.1.0+1
 
 dev_dependencies:
   flutter_test:

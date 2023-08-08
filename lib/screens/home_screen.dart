@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:application_ellocation/apis/apis.dart';
+import 'package:application_ellocation/helpers/dialogs.dart';
 import 'package:application_ellocation/screens/home_side_menu.dart';
 import 'package:application_ellocation/screens/search_result_screen.dart';
 import 'package:application_ellocation/screens/settings.dart';
@@ -134,26 +135,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               if (formKey.currentState?.validate() == false) {
                                 return;
                               }
-                              var retrievedUser =
-                                  await APIs.getFutureOfUserById(
-                                      idController.text.toString());
-                              Navigator.of(dialogContext).pop();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => SearchResultScreen(
-                                          idController.text.toString(),
-                                          _controller,
-                                          {
-                                            Marker(
-                                                markerId:
-                                                    MarkerId('user_location'),
-                                                position: LatLng(
-                                                    retrievedUser!.lat,
-                                                    retrievedUser.long))
-                                          },
-                                          retrievedUser.lat,
-                                          retrievedUser.long)));
+                              if (await APIs.checkStudentExistence(
+                                      idController.text.toString()) ==
+                                  true) {
+                                var retrievedUser =
+                                    await APIs.getFutureOfUserById(
+                                        idController.text.toString());
+                                Navigator.of(dialogContext).pop();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => SearchResultScreen(
+                                            idController.text.toString(),
+                                            _controller,
+                                            {
+                                              Marker(
+                                                  markerId:
+                                                      MarkerId('user_location'),
+                                                  position: LatLng(
+                                                      retrievedUser!.lat,
+                                                      retrievedUser.long))
+                                            },
+                                            retrievedUser.lat,
+                                            retrievedUser.long)));
+                              } else {
+                                Dialogs.showSnackbar(context, 'أدخل رمز صحيح');
+                                Navigator.pop(context);
+                                return;
+                              }
                             },
                           ),
                           TextButton(
@@ -287,12 +296,4 @@ class _HomeScreenState extends State<HomeScreen> {
     await controller
         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
-
-/*Future<void> executeAfterDelay() async {
-    // Wait for 2 seconds
-    await Future.delayed(Duration(seconds: 2));
-
-    // Execute your function here
-    print('Function executed after 2 seconds');
-  }*/
 }
